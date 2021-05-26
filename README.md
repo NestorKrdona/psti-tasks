@@ -343,7 +343,7 @@ git init
 
 Instalar y Loguearnos en heroku
 ```sh
-npm install -g heroku
+npm install heroku
 
 heroku login -i
 ```
