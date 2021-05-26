@@ -341,8 +341,10 @@ git init
 
 ### Creando nueva app en Heroku
 
-Loguearnos en heroku
+Instalar y Loguearnos en heroku
 ```sh
+npm install -g heroku
+
 heroku login -i
 ```
 
