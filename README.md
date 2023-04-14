@@ -112,7 +112,7 @@ Nota: Cuando se cree la base de datos, poner *Tasks* como nombre de colección.
 Primero necesitamos instalar *mongoose* con el siguiente comando:
 
 ```sh
-npm install mongoose
+npm install mongoose@6.10.0
 ```
 
 Luego en el archivo *api.js* poner el siguiente codigo:
