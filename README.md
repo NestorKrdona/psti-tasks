@@ -112,7 +112,7 @@ Nota: Cuando se cree la base de datos, poner *Tasks* como nombre de colección.
 Primero necesitamos instalar *mongoose* con el siguiente comando:
 
 ```sh
-npm install mongoose@6.10.0
+npm install mongoose
 ```
 
 Luego en el archivo *api.js* poner el siguiente codigo:
@@ -129,12 +129,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect(db, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, function (error) {
-    if (error) {
-        console.log("Error!" + error);
-    } else {
-        console.log("Se ha conectado con la base de datos exitosamente");
-    }
+}).then(() => {
+    console.log('Conexión a la base de datos exitosa');
+}).catch((err) => {
+    console.error('Error al conectar a la base de datos', err);
 });
 
 module.exports = router;
