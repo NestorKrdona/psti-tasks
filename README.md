@@ -220,14 +220,14 @@ curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"
 ### Consultar todas las tareas
 ```js
 router.get('/all-tasks', function (req, res) {
-    TaskModel.find(function (err, data) {
-        if (err) {
-            res.status(500).send("Internal error\n");
-        }
-        else {
+    TaskModel.find()
+        .then(data => {
             res.status(200).send(data);
-        }
-    });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send("Internal error\n");
+        });
 });
 ```
 
@@ -239,16 +239,20 @@ curl -i -X GET -H "Content-Type: application/json" http://localhost:3000/api/all
 ### Actualizar una tarea
 ```js
 router.post('/update-task', function (req, res) {
-    TaskModel.updateOne({ TaskId: req.body.TaskId }, {
-        Name: req.body.Name,
-        Deadline: req.body.Deadline
-    }, function (err, data) {
-        if (err) {
-            res.status(500).send("Internal error\n");
-        } else {
-            res.status(200).send("OK\n");
+    TaskModel.updateOne(
+        { TaskId: req.body.TaskId }, 
+        {
+            Name: req.body.Name,
+            Deadline: req.body.Deadline
         }
-    });
+    )
+        .then(data => {
+            res.status(200).send("OK\n");
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send("Internal error\n");
+        });
 });
 ```
 
@@ -261,13 +265,14 @@ curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"
 
 ```js
 router.delete('/delete-task', function (req, res) {
-    TaskModel.deleteOne({ TaskId: req.body.TaskId }, function (err, data) {
-        if (err) {
-            res.status(500).send("Internal error\n");
-        } else {
+    TaskModel.deleteOne({ TaskId: req.body.TaskId })
+        .then(data => {
             res.status(200).send("OK\n");
-        }
-    });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send("Internal error\n");
+        });
 });
 ```
 
