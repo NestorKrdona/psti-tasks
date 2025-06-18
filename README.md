@@ -198,23 +198,23 @@ router.post('/create-task', function (req, res) {
         Name: name,
         Deadline: deadline
     }
+
     var newTask = new TaskModel(task);
 
-    newTask.save(function (err, data) {
-        if (err) {
+    newTask.save()
+        .then(data => {
+            res.status(200).send("OK\n");
+        })
+        .catch(err => {
             console.log(err);
             res.status(500).send("Internal error\n");
-        }
-        else {
-            res.status(200).send("OK\n");
-        }
-    });
+        });
 });
 ```
 
 Podemos probar creando una tarea de la siguiente forma (tambien se puede utilizar Postman):
 ```sh
-curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"Estudiar para el quiz", "Deadline": "2020-12-01"}' http://localhost:3000/api/create-task
+curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"Estudiar para el quiz", "Deadline": "2025-12-01"}' http://localhost:3000/api/create-task
 ```
 
 ### Consultar todas las tareas
@@ -254,7 +254,7 @@ router.post('/update-task', function (req, res) {
 
 Podemos probar actualizando una tarea de la siguiente forma (tambien se puede utilizar Postman):
 ```sh
-curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"Estudiar para el quiz MODIFICADO", "Deadline": "2020-12-02"}' http://localhost:3000/api/update-task
+curl -i -X POST -H "Content-Type: application/json" -d '{"TaskId": 123, "Name":"Estudiar para el quiz MODIFICADO", "Deadline": "2025-12-02"}' http://localhost:3000/api/update-task
 ```
 
 ### Eliminar una tarea
